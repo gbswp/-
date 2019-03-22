@@ -1,19 +1,19 @@
 namespace app {
     export class Vector {
-        public x: number;
-        public y: number;
-        public constructor(x: number = 0, y: number = 0) {
+        x: number;
+        y: number;
+        constructor(x: number = 0, y: number = 0) {
             this.x = x;
             this.y = y;
         }
 
         /** 向量模 */
-        public get magnitude(): number {
+        get magnitude(): number {
             return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         }
 
         /** 向量相加，返回一个新向量 */
-        public add(vector: Vector): Vector {
+        add(vector: Vector): Vector {
             let v = new Vector();
             v.x = this.x + vector.x;
             v.y = this.y + vector.y;
@@ -21,7 +21,7 @@ namespace app {
         }
 
         /** 向量相减，返回一个新向量 */
-        public subtract(vector: Vector): Vector {
+        subtract(vector: Vector): Vector {
             let v = new Vector();
             v.x = this.x - vector.x;
             v.y = this.y - vector.y;
@@ -29,12 +29,12 @@ namespace app {
         }
 
         /** 点乘 */
-        public dot(vector: Vector) {
+        dot(vector: Vector) {
             return this.x * vector.x + this.y * vector.y;
         }
 
         /** 垂直轴 */
-        public perpendicular() {
+        perpendicular() {
             let v = new Vector();
             v.x = this.y;
             v.y = 0 - this.x;
@@ -43,7 +43,7 @@ namespace app {
 
 
         /**单位向量 */
-        public normalize() {
+        normalize() {
             let v = new Vector();
             let m = this.magnitude;
 
@@ -56,9 +56,14 @@ namespace app {
         }
 
         /** 与该向量垂直的单位向量 */
-        public normal() {
+        normal() {
             let p = this.perpendicular();
             return p.normalize();
+        }
+
+        setTo(x: number, y: number) {
+            this.x = x;
+            this.y = y;
         }
 
         toString() {

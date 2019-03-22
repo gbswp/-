@@ -7,58 +7,31 @@ namespace app {
      */
     export class OBBChecker {
         static check(sp1: Laya.Sprite, sp2: Laya.Sprite) {
-            let axisV1s = this.getSpriteAxisVs(sp1);
-            let axisV2s = this.getSpriteAxisVs(sp2);
+            let obb1 = OBB.create(sp1);
+            let obb2 = OBB.create(sp2);
 
-            let temp: Vector[] = [];
-            temp.push(axisV1s[0]);
-            temp.push(axisV1s[1]);
-            temp.push(axisV2s[0]);
-            temp.push(axisV2s[1]);
+            var axies1 = obb1.getAxies();
+            var axies2 = obb2.getAxies();
 
-            let centerV = new Vector(sp1.x - sp2.x, sp1.y - sp2.y);
+            var p1: Projection;
+            var p2: Projection;
 
-            for (let i = 0, len = temp.length; i < len; i++) {
-                let vec = temp[i];
-                let project1 = this.getProjectionRadius(sp1, vec, axisV1s);
-                let project2 = this.getProjectionRadius(sp2, vec, axisV2s);
-                let centerPro = this.dot(vec, centerV);
-                if (project1 + project2 <= centerPro) return false;
+            for (var i = 0; i < 4; i++) {
+                p1 = obb1.getProjection(axies1[i]);
+                p2 = obb2.getProjection(axies1[i]);
+                if (!p1.overlap(p2)) {
+                    return false;
+                }
+            }
+
+            for (var j = 0; j < 4; j++) {
+                p1 = obb1.getProjection(axies2[j]);
+                p2 = obb2.getProjection(axies2[j]);
+                if (!p1.overlap(p2)) {
+                    return false;
+                }
             }
             return true;
-
-        }
-
-        /**
-         * 取得Sprite轴单位向量
-         * 
-         * @protected
-         * @param {Laya.Sprite} sp 
-         * @returns [x轴向量,y轴向量]
-         * @memberof OBBChecker
-         */
-        protected static getSpriteAxisVs(sp: Laya.Sprite) {
-            let rad = sp.rotation / Math.PI / 180;
-            return [new Vector(Math.cos(rad), Math.sin(rad)), new Vector(-Math.sin(rad), Math.cos(rad))];
-        }
-
-        /**
-         * 取得对象投影半径
-         * 
-         * @protected
-         * @param {Laya.Sprite} sp 
-         * @param {Vector} vector 
-         * @param {Vector[]} axisVs 
-         * @memberof OBBChecker
-         */
-        protected static getProjectionRadius(sp: Laya.Sprite, vec: Vector, axisVs: Vector[]) {
-            let projectionX = this.dot(vec, axisVs[0]);
-            let projectionY = this.dot(vec, axisVs[1]);
-            return projectionX * sp.width / 2 + projectionY * sp.height / 2
-        }
-
-        protected static dot(vec1: Vector, vec2: Vector) {
-            return Math.abs(vec1.x * vec2.x + vec1.y * vec2.y);
         }
 
     }
