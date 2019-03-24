@@ -14,9 +14,9 @@ class TestUI extends ui.test.TestPageUI {
 	}
 
 	private checkCollision() {
-		let bool = app.checkHelper.checkPolygonCircle(this.sp1, this.sp2);
+		let bool = app.checkHelper.checkPolygon(app.checkHelper.createRect(this.sp1), app.checkHelper.createRect(this.sp2));
 		this.renderSprite(this.sp1, bool);
-		this.renderSprite2(this.sp2, bool);
+		this.renderSprite(this.sp2, bool);
 	}
 
 	private renderSprite(sp: Laya.Sprite, bool: boolean) {

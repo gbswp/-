@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":44,
+    "selecteID":45,
     "props":{"width":600,"sceneColor":"#ffffff","height":400},
     "nodeParent":-1,
     "label":"View",
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"Sprite",
-            "props":{"y":162,"x":189,"width":162,"var":"sp1","rotation":50,"pivotY":50,"pivotX":81,"height":100},
+            "props":{"y":162,"x":189,"width":162,"var":"sp1","pivotY":50,"pivotX":81,"height":100},
             "nodeParent":1,
             "label":"Sprite(sp1)",
             "isOpen":false,
@@ -51,14 +51,14 @@
             "child":[
                 {
                     "x":30,
-                    "type":"Circle",
-                    "props":{"y":50,"x":50,"radius":50,"lineWidth":1,"fillColor":"#ff0000"},
+                    "type":"Rect",
+                    "props":{"width":100,"lineWidth":1,"height":100,"fillColor":"#ff0000"},
                     "nodeParent":45,
-                    "label":"Circle",
+                    "label":"Rect",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":46,
+                    "compId":47,
                     "child":[
                         ]
                 }]
