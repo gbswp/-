@@ -1,15 +1,9 @@
 namespace app {
-    export class Vector {
-        x: number;
-        y: number;
-        constructor(x: number = 0, y: number = 0) {
-            this.x = x;
-            this.y = y;
-        }
+    export class Vector extends Laya.Point {
 
         /** 向量模 */
-        get magnitude(): number {
-            return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+        get length(): number {
+            return this.distance(0, 0)
         }
 
         /** 向量相加，返回一个新向量 */
@@ -41,11 +35,10 @@ namespace app {
             return v;
         }
 
-
         /**单位向量 */
         normalize() {
             let v = new Vector();
-            let m = this.magnitude;
+            let m = this.length;
 
             if (m != 0) {
                 v.x = this.x / m;
@@ -55,15 +48,10 @@ namespace app {
             return v;
         }
 
-        /** 与该向量垂直的单位向量 */
-        normal() {
+        /**垂直单位向量 */
+        perpendicularNormal() {
             let p = this.perpendicular();
             return p.normalize();
-        }
-
-        setTo(x: number, y: number) {
-            this.x = x;
-            this.y = y;
         }
 
         toString() {

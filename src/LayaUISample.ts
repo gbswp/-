@@ -12,16 +12,21 @@ class TestUI extends ui.test.TestPageUI {
 		this.registDrag(this.sp1);
 		this.registDrag(this.sp2);
 	}
-	
+
 	private checkCollision() {
-		let bool = app.OBBChecker.check(this.sp1, this.sp2);
+		let bool = app.checkHelper.checkPolygonCircle(this.sp1, this.sp2);
 		this.renderSprite(this.sp1, bool);
-		this.renderSprite(this.sp2, bool);
+		this.renderSprite2(this.sp2, bool);
 	}
 
 	private renderSprite(sp: Laya.Sprite, bool: boolean) {
 		sp.graphics.clear();
 		sp.graphics.drawRect(0, 0, sp.width, sp.height, bool ? "#ffffff" : "#ff0000")
+	}
+
+	private renderSprite2(sp: Laya.Sprite, bool: boolean) {
+		sp.graphics.clear();
+		sp.graphics.drawCircle(sp.width / 2, sp.height / 2, sp.width / 2, bool ? "#ffffff" : "#ff0000")
 	}
 
 	private registDrag(sp: Laya.Sprite) {
